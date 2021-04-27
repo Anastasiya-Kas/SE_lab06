@@ -1,181 +1,193 @@
-#include<iostream>
-#include   <cmath>
+#include <iostream>
+#include <cmath>
 #include "mycomplex.h"
 
 using namespace std;
 
-Complex::Complex(double aRe, double aIm)
-    {Re = aRe;   Im = aIm;}
-
-Complex::Complex(const Complex& aRval)
-    {Re = aRval.Re; Im = aRval.Im;}
-
-Complex::~Complex()
+Complex :: Complex(double aRe, double aIm)
 {
-    Re = 0.0;
-    Im = 0.0;
+      Re = aRe;
+      Im = aIm;
 }
 
-void Complex::Set(double aRe, double aIm)
-    {Re = aRe; Im = aIm;}
-
-Complex::operator double()
-    {return abs();}
-
-double Complex::abs()
-    {return sqrt(Re * Re + Im * Im);}
-
-Complex Complex::operator+(const Complex & aRval)
+Complex :: Complex(const Complex & aRval)
 {
-    Complex Result;
-    Result.Re = Re + aRval. Re;
-    Result.Im = Im + aRval.Im ;
-    return Result;
+      Re = aRval.Re;
+      Im = aRval.Im;
 }
 
-Complex::operator-( const Complex & aRval)
+Complex :: ~Complex()
 {
-    Complex Result;
-    Result.Re = Re - aRval.Re;
-    Result.Im = Im - aRval.Im;
-    return Result;
+      Re = 0.0;
+      Im = 0.0;
 }
 
-Complex::operator+(const double& aval)
+void Complex :: Set(double aRe, double aIm)
 {
-    Complex result;
-    result.Re = Re + aval;
-    result.Im = Im;
-    return Result;
+      Re = aRe;
+      Im = aIm;
 }
 
-Complex::operator-(const  double& aRval)
+Complex :: operator double()
 {
-    Complex Result(*this);
-    Result.Re = Re - aRval;
-    result.Im = Im;
-    return Result;
+      return abs();
 }
 
-Complex::operator*(const Complex  & aRval)
+double Complex :: abs()
 {
-    Complex Result;
-    Result.Re = Re * aRval.Re - Im * aRval.Im;
-    Result.Im = Re * aRval.Im + Im * aRval.Re;
-    return Result;
+      return sqrt(Re * Re + Im * Im);
 }
 
-Complex::operator*(const double& aRval)
+Complex Complex :: operator + (const Complex & aRval)
 {
-    Complex Result;
-    Result.Re = Re * aRval;
-    Result.Im = Im * aRval;
-    return Result;
+      Complex Result;
+      Result.Re = Re + aRval.Re;
+      Result.Im = Im + aRval.Im;
+      return Result;
 }
 
-Complex::operator/(const double& aRval)
+Complex Complex :: operator - (const Complex & aRval)
 {
-    Complex Result;
-    Result.Re = Re / aRval;
-    Result.Im = Im / aRval;
-    return Result;
+      Complex Result;
+      Result.Re = Re - aRval.Re;
+      Result.Im = Im - aRval.Im;
+      return Result;
 }
 
-Complex &Complex::operator+=( const   Complex&  arval)
+Complex Complex :: operator + (const double & aRval)
 {
-    Re += arval.Re;
-    Im += arval.Im;
-    return*this;
+      Complex result;
+      result.Re = Re + aRval;
+      result.Im = Im;
+      return result;
 }
 
-Complex & Complex::operator-=(const Complex& aRval)
+Complex Complex :: operator - (const double & aRval)
 {
-    Re -= aRval.Re;
-    Im -= aRval.Im;
-    return*this;
+      Complex Result(*this);
+      Result.Re = Re - aRval;
+      return Result;
 }
 
-Complex&Complex::operator*=(const Complex&aRval)
+Complex Complex :: operator * (const Complex  & aRval)
 {
-    double tmpRe = Re;
-    Re = Re * aRval.Re - Im * aRval.Im;
-    Im = Im * aRval.Re + tmpRe * aRval.Im;
-    return*this;
+      Complex Result;
+      Result.Re = Re * aRval.Re - Im * aRval.Im;
+      Result.Im = Re * aRval.Im + Im * aRval.Re;
+      return Result;
 }
 
-Complex&Complex::operator+=(const double&aRval)
+Complex Complex :: operator * (const double & aRval)
 {
-    Re += aRval;
-    return*this;
+      Complex Result;
+      Result.Re = Re * aRval;
+      Result.Im = Im * aRval;
+      return Result;
 }
 
-Complex&Complex::operator-=(const double&aRval)                                      {
+Complex Complex :: operator / (const double & aRval)
 {
-  Re -= aRval;
-  return*this;
+      Complex Result;
+      Result.Re = Re / aRval;
+      Result.Im = Im / aRval;
+      return Result;
 }
 
-Complex&Complex::operator*=( const  double  &  aRval)
+Complex & Complex :: operator +=  (const Complex & aRval)
 {
-    Re *= aRval;
-    Im *= aRval;
-    return*this;
+      Re += aRval.Re;
+      Im += aRval.Im;
+      return * this;
 }
 
-Complex&Complex::operator/=(const double&aRval)
+Complex & Complex :: operator -= (const Complex & aRval)
 {
-    Re /= aRval;
-    Im /= aRval;
-    return*this;
+      Re -= aRval.Re;
+      Im -= aRval.Im;
+      return * this;
 }
 
-Complex&Complex::operator=(const Complex& aRval)
+Complex & Complex :: operator *= (const Complex & aRval)
 {
-    Re = aRval.Re;
-    Im = aRval.Im;
-    return*this;
+      double tmpRe = Re;
+      Re = Re * aRval.Re - Im * aRval.Im;
+      Im = Im * aRval.Re + tmpRe * aRval.Im;
+      return * this;
 }
 
-Complex&Complex::operator=(const double& aRval)
+Complex & Complex :: operator += (const double & aRval)
 {
-     Re = aRval;
-     Im = 0.0;
-     return*this;
+      Re += aRval;
+      return * this;
 }
 
-istream & operator >> (istream &stream, Complex&a)
+Complex & Complex :: operator -= (const double & aRval)
 {
-    char tmp[256];
-    stream >> a.Re >> a.Im >> tmp;
-    return stream;
+      Re -= aRval;
+      return * this;
 }
 
-ostream&operator << (ostream&stream, Complex&a)
+Complex & Complex :: operator *= (const  double & aRval)
 {
-    stream << a.Re;
-    if(!(a.Im < 0)) stream << '+';  stream << a.Im << 'i';
-    return stream;
+      Re *= aRval;
+      Im *= aRval;
+      return * this;
 }
 
-Complex operator+(const double& aLval, const Complex& aRval)
+Complex & Complex :: operator /= (const double & aRval)
 {
-    Complex Result;
-    Result.Re = aLval + aRval.Re;
-    Result. Im =  aRval.Im;
-    return Result;
-    }
-Complex operator-(const double &aLval, const Complex&aRval)
-{
-    Complex Result;
-    Result.Re = aLval - aRval.Re;
-    Result.Im =- aRval.Im;
-    return Result;
+      Re /= aRval;
+      Im /= aRval;
+      return * this;
 }
 
-Complex operator*(const double& aLval, const Complex& a)
+Complex & Complex :: operator = (const Complex & aRval)
+      Re = aRval.Re;
+      Im = aRval.Im;
+      return * this;
+}
+
+Complex & Complex :: operator = (const double & aRval)
 {
-    Complex r;
-    r.Re = aLval * a.Re;
-    r.Im = aLval * a.Im;
-    return r;
+      Re = aRval;
+      Im = 0.0;
+      return * this;
+}
+
+istream & operator >> (istream & stream, Complex & a)
+{
+      char tmp[256];
+      stream >> a.Re >> a.Im >> tmp;
+      return stream;
+}
+ostream & operator << (ostream & stream, Complex & a)
+{
+      stream << a.Re;
+      if(!(a.Im < 0) ) stream << '+';
+      stream << a.Im << 'i';
+      return stream;
+}
+
+Complex operator + (const double & aLval, const Complex & aRval)
+{
+      Complex Result;
+      Result.Re = aLval + aRval.Re;
+      Result. Im = aRval.Im;
+      return Result;
+}
+
+Complex operator - (const double & aLval, const Complex & aRval)
+{
+      Complex Result;
+      Result.Re = aLval - aRval.Re;
+      Result.Im =- aRval.Im;
+      return Result;
+}
+
+Complex operator * (const double & aLval, const Complex & a)
+{
+      Complex r;
+      r.Re = aLval * a.Re;
+      r.Im = aLval * a.Im;
+      return r;
 }
